@@ -10,6 +10,6 @@ public class Program {
 		UI.printBoard(chessmatch.getPieces());
 		
 
-	} 
+	}  
 
 }
