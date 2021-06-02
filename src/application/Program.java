@@ -8,8 +8,6 @@ public class Program {
 		
 		ChessMatch chessmatch = new ChessMatch();
 		UI.printBoard(chessmatch.getPieces());
-		
-
 	}  
 
 }
