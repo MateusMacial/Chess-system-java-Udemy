@@ -74,7 +74,7 @@ public class ChessMatch {
 		
 		check = (testCheck(opponent(currentPlayer))) ? true : false;
 		
-		if(testCheck(opponent(currentPlayer))) {
+		if(testCheckMate(opponent(currentPlayer))) {
 			checkMate = true;
 		}
 		else {
@@ -85,7 +85,8 @@ public class ChessMatch {
 	}
 	
 	private Piece makeMove(Position source, Position target) {
-		Piece p = board.removePiece(source);
+		ChessPiece p = (ChessPiece)board.removePiece(source);
+		p.increaseMoveCount();
 		Piece capturedPiece = board.removePiece(target);
 		board.pleacePeace(p, target);
 		
@@ -98,7 +99,8 @@ public class ChessMatch {
 	}
 	
 	private void undoMove(Position source, Position target, Piece capturedPiece) {
-		Piece p = board.removePiece(target);
+		ChessPiece p = (ChessPiece)board.removePiece(target);
+		p.decreaseMoveCount();
 		board.pleacePeace(p, source);
 		
 		if(capturedPiece != null) {
@@ -162,7 +164,7 @@ public class ChessMatch {
 		}
 		List<Piece> list = piecesOnTheBoard.stream().filter(x -> ((ChessPiece)x).getColor() == opponent(color)).collect(Collectors.toList());
 		for(Piece p : list) {
-			boolean[][] = p.posibleMove();
+			boolean[][] mat = p.possibleMoves();
 			for(int i=0; i<board.getRows(); i++) {
 				for(int j=0; i<board.getColumns(); j++) {
 					if(mat[i][j]) {
